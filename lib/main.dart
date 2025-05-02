@@ -18,6 +18,25 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(title: Text("Flutter App"), centerTitle: true),
+        drawer: Drawer(
+          child: Column(
+            children: [
+              DrawerHeader(child: Text("Drawer")),
+              ListTile(title: Text("Logout")),
+
+            ],
+          )
+
+
+        ),
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+            SizedBox(height: 10.0),
+            FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+          ],
+        ),
         bottomNavigationBar: NavigationBar(
           destinations: [
             NavigationDestination(icon: Icon(Icons.home), label: "Home"),
