@@ -17,19 +17,24 @@ class MyApp extends StatelessWidget {
       //theme opf application
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("Flutter App"),
-          centerTitle: false,
-          leading: Icon(Icons.login),
-          actions: [
-            Text("data"),
-            Icon(Icons.abc)
+        appBar: AppBar(title: Text("Flutter App"), centerTitle: true),
+        bottomNavigationBar: NavigationBar(
+          destinations: [
+            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+            NavigationDestination(icon: Icon(Icons.settings), label: "Setting"),
           ],
-          backgroundColor: Colors.teal,
+          onDestinationSelected: (int value) {
+            print(value);
+          },
+          selectedIndex: 0,
         ),
       ),
+
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.dark),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.dark,
+        ),
       ),
     );
   }
