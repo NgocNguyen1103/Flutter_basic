@@ -16,7 +16,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //theme opf application
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Flutter App"),
+          centerTitle: false,
+          leading: Icon(Icons.login),
+          actions: [
+            Text("data"),
+            Icon(Icons.abc)
+          ],
+          backgroundColor: Colors.teal,
+        ),
+      ),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal, brightness: Brightness.dark),
       ),
