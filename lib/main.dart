@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(const MyApp());
 }
+//String? tille = "Flutter A"; //String? :this value can be null
 
-//stateless: screen not change
-//material app
-//scaffold: skeleton of the app
+// stateless: screen cannot refresh
+// stateful: screen can refresh
+// setstate: to refresh the screen
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,42 +15,103 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //theme opf application
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: Text("Flutter App"), centerTitle: true),
-        drawer:
-        SafeArea(child:Drawer(
-          child: ListTile(title: Text("Logout"),),
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colors.white38),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.grey,
+          brightness: Brightness.light,
         ),
-        ),
+      ),
+      home: MyHomePage(),
+    );
+  }
+}
 
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
 
-        floatingActionButton: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
-            SizedBox(height: 10.0),
-            FloatingActionButton(onPressed: () {}, child: Icon(Icons.add)),
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget con;
+    switch (currentIndex) {
+      case 0:
+        con = Text("Home");
+        break;
+      case 1:
+        con = Text("Profile");
+        break;
+      case 2:
+        con = Text("Settings");
+        break;
+      default:
+        con = Text("unknown");
+
+        break;
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Chatbot", style: TextStyle(color: Colors.black)),
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue.shade800),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.message),
+              title: Text('Messages'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            // ... more items
           ],
-        ),
-        bottomNavigationBar: NavigationBar(
-          destinations: [
-            NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-            NavigationDestination(icon: Icon(Icons.settings), label: "Setting"),
-          ],
-          onDestinationSelected: (int value) {
-            print(value);
-          },
-          selectedIndex: 0,
         ),
       ),
 
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-          brightness: Brightness.dark,
-        ),
+      body: Center(child: con),
+      bottomNavigationBar: NavigationBar(
+        destinations: [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.person), label: "Profile"),
+          NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+
+        selectedIndex: currentIndex,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          print("Pressed");
+        },
       ),
     );
   }
