@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_one/widgets/navbar_widget.dart';
+import './views/widgets//navbar_widget.dart';
 import 'package:flutter_one/views/widget_tree.dart';
 void main() {
   runApp(const MyApp());

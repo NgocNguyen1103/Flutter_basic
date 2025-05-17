@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_one/widgets/navbar_widget.dart';
+import 'package:flutter_one/data/notifiers.dart';
+import './widgets/navbar_widget.dart';
 import 'package:flutter_one/views/pages/home_page.dart';
 import 'package:flutter_one/views/pages/profile_page.dart';
 List<Widget> pages = [
@@ -14,7 +15,9 @@ class WidgetTree extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text("Chatbot"), centerTitle: true),
-        body: pages.elementAt(1),
+        body: ValueListenableBuilder(valueListenable: selectedPageNotifier, builder: (context, selectedPage, child) {
+          return pages.elementAt(selectedPage);
+        },),
         bottomNavigationBar: NavbarWidget()
     );
   }
