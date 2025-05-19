@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_one/data/notifiers.dart';
+import 'package:flutter_one/views/pages/welcome_page.dart';
 import './views/widgets//navbar_widget.dart';
 import 'package:flutter_one/views/widget_tree.dart';
 
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
               brightness: isDark ? Brightness.dark : Brightness.light,
             ),
           ),
-          home: WidgetTree(),
+          home: WelcomePage()
         );
       },
     );
